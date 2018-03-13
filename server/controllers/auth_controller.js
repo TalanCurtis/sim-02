@@ -25,16 +25,18 @@ module.exports={
         res.status(200).send(req.session)
     },
     register:(req, res, next)=>{
-        let newUser = {
-            // TODO id should be created by database
-            id: id,
+        let user = {
             username: req.body.username,
             password: req.body.password
         }
-        // TODO id should come from database
-        id++
-        users.push(newUser)
-        req.session.user.username = req.body.username
-        res.status(200).send(req.session.user)
+        const database = req.app.get('db')
+        database.addUser([user.username, user.password]).then(dbResponse=>{
+            // TODO check to see if username already taken.
+            // or just use auth 0
+            console.log('db res', dbResponse[0])
+            req.session.user.username = dbResponse[0].username;
+            req.session.user.id = dbResponse[0].id
+            res.status(200).send(req.session.user);
+        })
     }
 }

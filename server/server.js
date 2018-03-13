@@ -31,19 +31,18 @@ app.use(session({
     saveUninitialized: true
 }));
 //// Auth
-/// switch req.session.user <> req.user
+/// switch req.session.user <> req.user///////////
+/////////////////////////////////////////////////
 // app.use((req, res, next) => {
 //     if (!req.session.user) {
 //         req.session.user = {
-//             id: 16,
-//             username: "userName",
-//             first_name: "DirstName",
-//             last_name: "LastName",
-//             email: "email@gmail.com",
+//             id: 1,
+//             username: "userName"
 //         }
 //     }
 //     next()
 // })
+/////////////////////////////////////////////////
 app.use(checkForSession)
 
 
@@ -74,6 +73,7 @@ app.get('/auth/me', (req, res) => {
 //// Auth Controller
 app.post('/api/auth/login', auth_controller.login)
 app.post('/api/auth/logout', auth_controller.logout)
+app.post('/api/auth/register', auth_controller.register)
 // app.get('/api/logout', (req, res) => {
 //     req.logout();
 //     return res.redirect('http://localhost:3000/')

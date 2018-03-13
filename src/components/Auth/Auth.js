@@ -37,6 +37,11 @@ class Auth extends Component{
             password: password
         }
         console.log('body: ', body)
+        axios.post('/api/auth/register', body)
+        .then(res => { console.log('login response: ', res.data); this.props.history.push(`/Dashboard/${res.data.id}`) })
+        // if its an error or bad response run catch
+        .catch(() => { this.setState({ error: true })
+        })
     }
     
     render(){
