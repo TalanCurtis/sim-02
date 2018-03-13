@@ -2,7 +2,7 @@
   "name": "sim-02",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http:/localhost:3006",
+  "proxy":"http://localhost:3006",
   "main":"server/server.js",
   "dependencies": {
     "axios": "^0.18.0",
