@@ -72,8 +72,8 @@ app.get('/auth/me', (req, res) => {
     }
 })
 //// Auth Controller
-app.post('/api/login', auth_controller.login)
-app.get('/api/logout', auth_controller.logout)
+app.post('/api/auth/login', auth_controller.login)
+app.post('/api/auth/logout', auth_controller.logout)
 // app.get('/api/logout', (req, res) => {
 //     req.logout();
 //     return res.redirect('http://localhost:3000/')
