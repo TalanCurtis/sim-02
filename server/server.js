@@ -11,6 +11,23 @@ const app = express();
 // Deconstruction .env
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
 
+const properties = [
+    {
+        id: 0,
+        name: 'propname',
+        desc: 'description of property',
+        address: '1111 Dreaver Lane',
+        city: 'Salt Lake City',
+        state: 'Utah',
+        zip: 84101,
+        image:'https://www.pexels.com/search/house/',
+        loan: 50000000,
+        mortgage: 150000,
+        desired_rent:10000,
+        recommended_rent: 20000
+    }
+]
+
 // Connect to Database
 massive({ connectionString: CONNECTION_STRING }).then(db => {
     app.set('db', db)

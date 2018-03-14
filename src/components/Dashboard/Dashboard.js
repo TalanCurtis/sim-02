@@ -18,7 +18,7 @@ function Dashboard(props) {
             <div className="Container">
                 <button className='NewPropButton'> Add new property </button>
                 <div>
-                    <p>List of properties with "disired rent" greator than: $</p>
+                    <p>List of properties with "disired rent" greater than: $</p>
                     <input type="number" />
                     <button> Filter</button>
                     <button> Reset</button>
