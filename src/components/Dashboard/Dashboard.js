@@ -1,14 +1,22 @@
 import React from 'react';
 import Header from '../Header/Header';
+import {connect} from 'react-redux';
 
-function Dashboard() {
+function Dashboard(props) {
 
+    function test(){
+        console.log('hello', props)
+    }
     return (
         <div className="Dashboard">
             <Header />
-
+            <button onClick={()=>test()}>Test</button>
         </div>
     )
 }
 
-export default Dashboard
+function mapStateToProps(state){
+    return state;
+}
+
+export default connect(mapStateToProps)(Dashboard)
