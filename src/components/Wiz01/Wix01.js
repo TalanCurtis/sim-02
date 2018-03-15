@@ -8,7 +8,8 @@ class Wiz01 extends Component{
     constructor(props){
         super(props)
         this.state = {
-
+            name:'',
+            description:''
         }
     }
 
@@ -18,6 +19,13 @@ class Wiz01 extends Component{
             if (res.data.username === "") { this.props.history.push('/') }
             else { this.props.history.push('/Dashboard/' + res.data.id) }
         })
+    }
+
+    handleOnChange(key, value){
+        this.setState({
+            [key]: value
+        })
+        console.log(this.state)
     }
 
     render(){
@@ -34,14 +42,21 @@ class Wiz01 extends Component{
                             </div>
                             <WizTracker step={this.props.match.path.split('/').pop() * 1} />
                         </div>
-                        <div>
+                        <div className="Inputs">
                             <div>
                                 <h2>Name:</h2>
-                                <input type="text" />
+                                <input type="text" style={{ 'width': '400px'}} 
+                                    title='name'
+                                    onChange={(e)=>{this.handleOnChange(e.target.title, e.target.value)}}
+                                 />
                             </div>
                             <div>
                                 <h2>Description:</h2>
-                                <input type="text" />
+                                {/* <input type="textarea" height='200px'/> */}
+                                <textarea style={{'height':'200px' , 'width': '400px'}}
+                                    title='description'
+                                    onChange={(e)=>{this.handleOnChange(e.target.title, e.target.value)}}
+                                 />
                             </div>
                             <div className="WizButtons">
                                 <button >Previous Step</button>
