@@ -1,44 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from '../Header/Header';
 import { connect } from 'react-redux';
 import { addProperty } from '../../ducks/reducer';
+import axios from 'axios';
+import Card from '../Card/Card';
 
-function Dashboard(props) {
+class Dashboard extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            properties: []
+        }
+    }
+    componentDidMount() {
+        console.log('this is props', this.props)
+        console.log('id', this.props.match.params.id)
+        axios.get('/api/properties/' + this.props.match.params.id * 1).then(res => {
+            this.setState({ properties: res.data })
+        })
+    }
 
-    function test() {
-        console.log('hello', props)
-        props.addProperty({ username: 'cheese' })
-        console.log('hello', props)
+    test() {
+        // console.log('hello', this.props)
+        // props.addProperty({ username: 'cheese' })
+        // console.log('hello', this.props)
 
     }
-    return (
-        <div className="Dashboard">
-            <Header />
-            <div className='DashboardContainer'>
-            <div className="Container">
-                <button className='NewPropButton'> Add new property </button>
-                <div>
-                    <p>List of properties with "disired rent" greater than: $</p>
-                    <input type="number" />
-                    <button> Filter</button>
-                    <button> Reset</button>
-                </div>
-                <div>
-                    <h1> Home Listings</h1>
-                    --List of homes--
-                </div>
 
-            </div>
+    render() {
+        let properties = this.state.properties.map((x, i) => {
+            return (
+                <div key={i}>
+                    <Card info={x}/>
+                </div>
+            )
+        })
+        return (
+            <div className="Dashboard">
+                <Header />
+                {/* {JSON.stringify(this.state)} */}
+                <div className='DashboardContainer'>
+                    <div className="Container">
+                        <button className='NewPropButton'> Add new property </button>
+                        <div>
+                            <p>List of properties with "desired rent" greater than: $</p>
+                            <input type="number" />
+                            <button> Filter</button>
+                            <button> Reset</button>
+                            <h1> Home Listings</h1>
+                            {properties}
+                        </div>
 
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
             </div>
-            <div>
-                ------------------------------------
-            </div>
-            {props.user.username}
-            {JSON.stringify(props.user.username)}
-            <button onClick={() =>test()}>Test</button>
-        </div>
-    )
+        )
+    }
 }
 
 function mapStateToProps(state) {

@@ -65,6 +65,7 @@ app.use(checkForSession)
 
 // Controller Imports
 const auth_controller = require('./controllers/auth_controller')
+const user_controller = require('./controllers/user_controller')
 
 // Endpoints.
 //// Test EP
@@ -95,6 +96,7 @@ app.post('/api/auth/register', auth_controller.register)
 //     req.logout();
 //     return res.redirect('http://localhost:3000/')
 // })
+app.get('/api/properties/:id', user_controller.getProperties)
 
 
 app.listen(SERVER_PORT, () => { console.log('simin on port: ' + SERVER_PORT) })
