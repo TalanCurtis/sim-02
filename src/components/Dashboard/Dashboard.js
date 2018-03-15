@@ -36,7 +36,7 @@ function Dashboard(props) {
             </div>
             {props.user.username}
             {JSON.stringify(props.user.username)}
-            <button onClick={() => test()}>Test</button>
+            <button onClick={() =>test()}>Test</button>
         </div>
     )
 }

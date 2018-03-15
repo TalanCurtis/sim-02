@@ -32,6 +32,13 @@
   border: none;
   background-color: #8AEA92;
 }
+.Auth{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 /* .App {
   text-align: center;
 }
