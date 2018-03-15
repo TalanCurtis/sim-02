@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addProperty } from '../../ducks/reducer';
 import axios from 'axios';
 import Card from '../Card/Card';
+import {Link} from 'react-router-dom';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class Dashboard extends Component {
                 {/* {JSON.stringify(this.state)} */}
                 <div className='DashboardContainer'>
                     <div className="Container">
-                        <button className='NewPropButton'> Add new property </button>
+                    <Link to='/Wizard/1'><button className='NewPropButton'> Add new property </button></Link>
                         <div>
                             <p>List of properties with "desired rent" greater than: $</p>
                             <input type="number" />
