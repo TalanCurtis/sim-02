@@ -24,7 +24,8 @@ class Wiz05 extends Component {
     }
 
     handleComplete() {
-        let property = { ...this.props.wizard }
+        let recommended_rent = Math.floor(this.props.wizard.mortgage * 1.25)
+        let property = { ...this.props.wizard, ...this.state, recommended_rent: recommended_rent }
         console.log(' property ', property)
         this.props.updateWizard(property)
 

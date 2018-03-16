@@ -50,15 +50,15 @@ app.use(session({
 //// Auth
 /// switch req.session.user <> req.user///////////
 /////////////////////////////////////////////////
-app.use((req, res, next) => {
-    if (!req.session.user) {
-        req.session.user = {
-            id: 1,
-            username: "userName"
-        }
-    }
-    next()
-})
+// app.use((req, res, next) => {
+//     if (!req.session.user) {
+//         req.session.user = {
+//             id: 1,
+//             username: "userName"
+//         }
+//     }
+//     next()
+// })
 /////////////////////////////////////////////////
 app.use(checkForSession)
 

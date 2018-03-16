@@ -4,20 +4,22 @@ import { connect } from 'react-redux';
 // import { addProperty } from '../../ducks/reducer';
 import axios from 'axios';
 import Card from '../Card/Card';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Dashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            properties: []
+            properties: [],
+            filtered: [],
+            amount: 0
         }
     }
     componentDidMount() {
         console.log('this is props', this.props)
         console.log('id', this.props.match.params.id)
         axios.get('/api/properties/' + this.props.match.params.id * 1).then(res => {
-            this.setState({ properties: res.data })
+            this.setState({ properties: res.data, filtered: res.data })
         })
     }
 
@@ -27,12 +29,24 @@ class Dashboard extends Component {
         // console.log('hello', this.props)
 
     }
+    handleFilter() {
+        this.setState({filtered:this.state.properties})
+        
+        console.log('filter', this.state.properties)
+        let newFiltered = this.state.properties.filter(x => x.desired_rent > this.state.amount)
+        this.setState({filtered: newFiltered})
+
+    }
+    handleReset() {
+        console.log('reset')
+        this.setState({filtered:this.state.properties, amount:0})
+    }
 
     render() {
-        let properties = this.state.properties.map((x, i) => {
+        let properties = this.state.filtered.map((x, i) => {
             return (
                 <div key={i}>
-                    <Card info={x}/>
+                    <Card info={x} />
                 </div>
             )
         })
@@ -42,12 +56,12 @@ class Dashboard extends Component {
                 {/* {JSON.stringify(this.state)} */}
                 <div className='DashboardContainer'>
                     <div className="Container">
-                    <Link to='/Wizard/1'><button className='NewPropButton'> Add new property </button></Link>
+                        <Link to='/Wizard/1'><button className='NewPropButton'> Add new property </button></Link>
                         <div>
                             <p>List of properties with "desired rent" greater than: $</p>
-                            <input type="number" />
-                            <button> Filter</button>
-                            <button> Reset</button>
+                            <input type="number" value={this.state.amount} onChange={(e) => this.setState({ amount: e.target.value })} />
+                            <button onClick={() => this.handleFilter()}> Filter</button>
+                            <button onClick={() => this.handleReset()}> Reset</button>
                             <h1> Home Listings</h1>
                             {properties}
                         </div>
