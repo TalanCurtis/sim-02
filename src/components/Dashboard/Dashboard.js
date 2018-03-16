@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import { connect } from 'react-redux';
-import { addProperty } from '../../ducks/reducer';
+// import { addProperty } from '../../ducks/reducer';
 import axios from 'axios';
 import Card from '../Card/Card';
 import {Link} from 'react-router-dom';
@@ -66,4 +66,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapStateToProps, { addProperty: addProperty })(Dashboard)
+export default connect(mapStateToProps)(Dashboard)

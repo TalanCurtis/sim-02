@@ -12,14 +12,14 @@ class Auth extends Component {
     }
 
     handleLogin() {
-        console.log('handle login')
+        // console.log('handle login')
         let { username, password } = this.state
         // Create body to send in the post
         let body = {
             username: username,
             password: password
         }
-        console.log('body to sign in', body)
+        // console.log('body to sign in', body)
         // make a call to the api
         axios.post('/api/auth/login', body)
             // if i get a good response run then
@@ -29,14 +29,14 @@ class Auth extends Component {
     }
 
     handleRegister() {
-        console.log('handle register')
+        // console.log('handle register')
         let { username, password } = this.state
         // Create body to send in the post
         let body = {
             username: username,
             password: password
         }
-        console.log('body: ', body)
+        // console.log('body: ', body)
         axios.post('/api/auth/register', body)
             .then(res => { console.log('login response: ', res.data); this.props.history.push(`/Dashboard/${res.data.id}`) })
             // if its an error or bad response run catch
@@ -47,7 +47,7 @@ class Auth extends Component {
 
     render() {
         let disabled = !!this.state.username && !!this.state.password
-        console.log(disabled)
+        // console.log(disabled)
         return (
             <div className="Auth">
                 {/* <img src={logo} alt=''></img> */}

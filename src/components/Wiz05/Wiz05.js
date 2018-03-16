@@ -3,7 +3,7 @@ import WizTracker from '../WizTracker/WizTracker';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { updateWizard } from '../../ducks/reducer';
 
 
@@ -25,10 +25,16 @@ class Wiz05 extends Component {
     }
 
     handleComplete() {
-        let property = { ...this.props.wizard, ...this.state }
+        let property = { ...this.props.wizard }
         console.log(' property ', property)
         this.props.updateWizard(property)
-        this.props.history.push('/Wizard/5')
+
+        axios.post('/api/properties', property).then(res => {
+            console.log(res.data)
+            console.log(res.data[0].user_id)
+            this.props.history.push('/Dashboard/'+res.data[0].user_id)
+        })
+        // this.props.history.push('/Dashboard/')
     }
 
     handlePrevious() {

@@ -3,7 +3,6 @@ import WizTracker from '../WizTracker/WizTracker';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { updateWizard } from '../../ducks/reducer';
 
 class Wiz01 extends Component {

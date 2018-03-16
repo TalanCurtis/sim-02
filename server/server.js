@@ -97,6 +97,7 @@ app.post('/api/auth/register', auth_controller.register)
 //     return res.redirect('http://localhost:3000/')
 // })
 app.get('/api/properties/:id', user_controller.getProperties)
+app.post('/api/properties', user_controller.addProperty)
 
 
 app.listen(SERVER_PORT, () => { console.log('simin on port: ' + SERVER_PORT) })

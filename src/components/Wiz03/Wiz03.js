@@ -3,7 +3,6 @@ import WizTracker from '../WizTracker/WizTracker';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { updateWizard } from '../../ducks/reducer';
 
 
@@ -62,7 +61,7 @@ class Wiz03 extends Component {
                             <div>
                                 <div className='ImageTest' >
                                     <div>
-                                        <img src={this.state.image} alt="Preview" />
+                                        <img src={this.state.image} alt="Preview" style={{ 'width': '400px' }} />
 
                                     </div>
                                 </div>

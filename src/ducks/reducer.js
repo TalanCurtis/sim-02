@@ -23,19 +23,19 @@ let initialState = {
 
 // Constants
 // const UPDATE_PROPERTY = 'UPDATE_PROPERTY'
-const ADD_PROPERTY = 'ADD_PROPERTY'
+// const ADD_PROPERTY = 'ADD_PROPERTY'
 const DELETE_PROPERTY = 'DELETE_PROPERTY'
 const UPDATE_WIZARD = 'UPDATE_WIZARD'
 
 // Action Builders
-export function addProperty(property) {
-    console.log('addProperty:', property)
+// export function addProperty(property) {
+//     console.log('addProperty:', property)
 
-    return {
-        type: ADD_PROPERTY,
-        payload: property
-    }
-}
+//     return {
+//         type: ADD_PROPERTY,
+//         payload: property
+//     }
+// }
 export function updateWizard(property) {
     console.log('updateProperty:', property)
 
@@ -50,13 +50,13 @@ export function updateWizard(property) {
 // Reducer
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ADD_PROPERTY:
-            // return  Object.assign({}, state, ...state.user, action.payload);
-            return {...state,
-                    user: {
-                        ...state.user, username:action.payload.username
-                    }
-            }
+        // case ADD_PROPERTY:
+        //     // return  Object.assign({}, state, ...state.user, action.payload);
+        //     return {...state,
+        //             user: {
+        //                 ...state.user, username:action.payload.username
+        //             }
+        //     }
         case UPDATE_WIZARD:
             // return  Object.assign({}, state, ...state.user, action.payload);
             return {...state, wizard: action.payload}
