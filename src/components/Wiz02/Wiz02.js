@@ -3,7 +3,7 @@ import WizTracker from '../WizTracker/WizTracker';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
-import { updateWizard } from '../../ducks/reducer';
+import { updateWizard, cancelWizard } from '../../ducks/reducer';
 
 
 class Wiz02 extends Component {
@@ -19,15 +19,14 @@ class Wiz02 extends Component {
     }
 
     handleCancel() {
-        axios.get('/auth/me').then(res => {
-            if (res.data.username === "") { this.props.history.push('/') }
-            else { this.props.history.push('/Dashboard/' + res.data.id) }
-        })
+        // console.log('Cancel')
+        this.props.history.push('/Dashboard/' + this.props.wizard.user_id)
+        this.props.cancelWizard()
     }
 
     handleNext() {
         let property = { ...this.props.wizard, ...this.state }
-        console.log(' property ',property)
+        console.log(' property ', property)
         this.props.updateWizard(property)
         this.props.history.push('/Wizard/3')
     }
@@ -111,4 +110,4 @@ class Wiz02 extends Component {
 function mapStateToProps(state) {
     return state;
 }
-export default connect(mapStateToProps, { updateWizard: updateWizard })(Wiz02)
+export default connect(mapStateToProps, { updateWizard: updateWizard, cancelWizard: cancelWizard })(Wiz02)

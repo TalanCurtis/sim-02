@@ -3,7 +3,7 @@ import WizTracker from '../WizTracker/WizTracker';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
-import { updateWizard } from '../../ducks/reducer';
+import { updateWizard , cancelWizard} from '../../ducks/reducer';
 
 
 class Wiz04 extends Component {
@@ -17,10 +17,9 @@ class Wiz04 extends Component {
     }
 
     handleCancel() {
-        axios.get('/auth/me').then(res => {
-            if (res.data.username === "") { this.props.history.push('/') }
-            else { this.props.history.push('/Dashboard/' + res.data.id) }
-        })
+        // console.log('Cancel')
+        this.props.history.push('/Dashboard/' + this.props.wizard.user_id)
+        this.props.cancelWizard()
     }
 
     handleNext() {
@@ -70,7 +69,7 @@ class Wiz04 extends Component {
                                 />
                             </div>
                             <div>
-                                <h2>Monthly Mortgag:</h2>
+                                <h2>Monthly Mortgage:</h2>
                                 <input type="number" style={{ 'width': '400px' }}
                                     value={this.state.mortgage}
                                     title='mortgage'
@@ -94,4 +93,4 @@ class Wiz04 extends Component {
 function mapStateToProps(state) {
     return state;
 }
-export default connect(mapStateToProps, { updateWizard: updateWizard })(Wiz04)
+export default connect(mapStateToProps, { updateWizard: updateWizard, cancelWizard: cancelWizard })(Wiz04)

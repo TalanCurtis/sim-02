@@ -3,28 +3,29 @@ import './Header.css';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateWizard } from '../../ducks/reducer';
+import { updateWizard, cancelWizard } from '../../ducks/reducer';
 
 
 class Header extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         axios.get('/auth/me').then(res => {
             // add user id to redux store
-                let property = { ...this.props.wizard, user_id:res.data.id }
-                this.props.updateWizard(property)
+            let property = { ...this.props.wizard, user_id: res.data.id }
+            this.props.updateWizard(property)
             if (res.data.username === "") { this.props.history.push('/') }
         })
     }
 
-    handleLogout(){
+    handleLogout() {
+        this.props.cancelWizard()
         axios.post('/api/auth/logout').then(res => {
             console.log('handleLogout', res.data)
             this.props.history.push('/')
         })
     }
 
-    render(){
+    render() {
         return (
             <div className='Header'>
                 Header comp
@@ -38,4 +39,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default withRouter(connect(mapStateToProps, {updateWizard:updateWizard})(Header))
+export default withRouter(connect(mapStateToProps, { updateWizard: updateWizard, cancelWizard: cancelWizard })(Header))

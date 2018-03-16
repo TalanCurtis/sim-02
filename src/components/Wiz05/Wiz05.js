@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
-import { updateWizard } from '../../ducks/reducer';
+import { updateWizard, cancelWizard } from '../../ducks/reducer';
 
 
 class Wiz05 extends Component {
@@ -18,10 +18,9 @@ class Wiz05 extends Component {
     }
 
     handleCancel() {
-        axios.get('/auth/me').then(res => {
-            if (res.data.username === "") { this.props.history.push('/') }
-            else { this.props.history.push('/Dashboard/' + res.data.id) }
-        })
+        // console.log('Cancel')
+        this.props.history.push('/Dashboard/' + this.props.wizard.user_id)
+        this.props.cancelWizard()
     }
 
     handleComplete() {
@@ -32,7 +31,7 @@ class Wiz05 extends Component {
         axios.post('/api/properties', property).then(res => {
             console.log(res.data)
             console.log(res.data[0].user_id)
-            this.props.history.push('/Dashboard/'+res.data[0].user_id)
+            this.props.history.push('/Dashboard/' + res.data[0].user_id)
         })
         // this.props.history.push('/Dashboard/')
     }
@@ -68,10 +67,10 @@ class Wiz05 extends Component {
                         <div className="Inputs">
 
                             <div>
-                                <h2>Recommended Rent: ${this.state.recommended_rent}</h2>
+                                <h2>Recommended Rent: ${Math.floor(this.props.wizard.mortgage * 1.25)}</h2>
                             </div>
                             <div>
-                                <h2>Resired Rent:</h2>
+                                <h2>Desired Rent:</h2>
                                 <input type="number" style={{ 'width': '400px' }}
                                     value={this.state.desired_rent}
                                     title='desired_rent'
@@ -95,4 +94,4 @@ class Wiz05 extends Component {
 function mapStateToProps(state) {
     return state;
 }
-export default connect(mapStateToProps, { updateWizard: updateWizard })(Wiz05)
+export default connect(mapStateToProps, { updateWizard: updateWizard, cancelWizard: cancelWizard })(Wiz05)

@@ -3,7 +3,7 @@ import WizTracker from '../WizTracker/WizTracker';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
-import { updateWizard } from '../../ducks/reducer';
+import { updateWizard, cancelWizard } from '../../ducks/reducer';
 
 class Wiz01 extends Component {
     constructor(props) {
@@ -15,10 +15,9 @@ class Wiz01 extends Component {
     }
 
     handleCancel() {
-        axios.get('/auth/me').then(res => {
-            if (res.data.username === "") { this.props.history.push('/') }
-            else { this.props.history.push('/Dashboard/' + res.data.id) }
-        })
+        // console.log('Cancel')
+        this.props.history.push('/Dashboard/' + this.props.wizard.user_id)
+        this.props.cancelWizard()
     }
 
     handleNext() {
@@ -27,7 +26,7 @@ class Wiz01 extends Component {
             name: this.state.name,
             description: this.state.description
         }
-        property = {...this.props.wizard, ...property}
+        property = { ...this.props.wizard, ...property }
         // console.log(' property ',property)
         this.props.updateWizard(property)
         this.props.history.push('/Wizard/2')
@@ -75,7 +74,7 @@ class Wiz01 extends Component {
                                 />
                             </div>
                             <div className="WizButtons">
-                                <button onClick={()=>this.handleNext()}>Next Step </button>
+                                <button onClick={() => this.handleNext()}>Next Step </button>
                             </div>
                         </div>
 
@@ -89,4 +88,4 @@ class Wiz01 extends Component {
 function mapStateToProps(state) {
     return state;
 }
-export default connect(mapStateToProps, {updateWizard: updateWizard})(Wiz01)
+export default connect(mapStateToProps, { updateWizard: updateWizard, cancelWizard: cancelWizard })(Wiz01)
