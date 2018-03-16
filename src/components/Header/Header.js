@@ -4,7 +4,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateWizard, cancelWizard } from '../../ducks/reducer';
-
+import logo from '../../images/header_logo.png'
 
 class Header extends Component {
 
@@ -28,8 +28,13 @@ class Header extends Component {
     render() {
         return (
             <div className='Header'>
-                Header comp
-            <button onClick={() => this.handleLogout()}>logout</button>
+                <div>
+                    <img src={logo} alt="" />
+                </div>
+                <h1>Houser </h1>
+                <div>
+                    <button onClick={() => this.handleLogout()}>logout</button>
+                </div>
             </div>
         )
     }

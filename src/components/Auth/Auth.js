@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import logo from '../../images/auth_logo.png';
 
 class Auth extends Component {
     constructor() {
@@ -52,15 +53,16 @@ class Auth extends Component {
             <div className="Auth">
                 {/* <img src={logo} alt=''></img> */}
                 <div>
+                    <img src={logo} alt=""/>
                     <h2>User Name</h2>
                     <input type="text" value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} />
                     <h2>Password</h2>
                     <input type="password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
-                    <div>
-                        <button disabled={!disabled} onClick={() => (this.handleLogin())}>Login</button>
+                    <div className="ButtonSpace">
                         <button disabled={!disabled} onClick={() => (this.handleRegister())}>Register</button>
+                        <button disabled={!disabled} onClick={() => (this.handleLogin())}>Login</button>
                     </div>
-                    {this.state.error ? <h3>Error: Wrong name or Password.</h3> : null}
+                    {this.state.error ? <h3 style={{'color':'red'}}>Wrong name or Password.</h3> : null}
                 </div>
             </div>
         )

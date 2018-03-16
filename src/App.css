@@ -55,7 +55,16 @@
   /* background-color: #fff; */
   background: linear-gradient(to bottom, #e2f3ea, #ffffff);  
   width: 600px;
-  height: 100vh;
+  /* height: (80vh - 80px); */
+  height: calc(100vh - 100px);
+  padding: 10px;
+  justify-content: center;
+  
+}
+.WizTracker{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .Markers{
@@ -87,7 +96,24 @@ button{
   margin:5px;
   height: 30px;
   font-size: 100%;
+  font-weight: 600;
   
+}
+.ButtonSpace{
+  display: flex;
+  justify-content: space-between;
+}
+
+h1{
+  font-size: 200%;
+  font-weight: 600;
+}
+h2{
+  font-size: 115%;
+  font-weight: 400;
+}
+.Header h1{
+color: white;
 }
 
 .Complete{
