@@ -3,37 +3,51 @@ import WizTracker from '../WizTracker/WizTracker';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { updateWizard } from '../../ducks/reducer';
 
-class Wiz01 extends Component{
-    constructor(props){
+class Wiz01 extends Component {
+    constructor(props) {
         super(props)
         this.state = {
-            name:'',
-            description:''
+            name: this.props.wizard.name,
+            description: this.props.wizard.description
         }
     }
 
-     handleCancel() {
-        console.log('props', this.props)
+    handleCancel() {
         axios.get('/auth/me').then(res => {
             if (res.data.username === "") { this.props.history.push('/') }
             else { this.props.history.push('/Dashboard/' + res.data.id) }
         })
     }
 
-    handleOnChange(key, value){
+    handleNext() {
+        console.log('next', this.props)
+        let property = {
+            name: this.state.name,
+            description: this.state.description
+        }
+        property = {...this.props.wizard, ...property}
+        // console.log(' property ',property)
+        this.props.updateWizard(property)
+        this.props.history.push('/Wizard/2')
+    }
+    handlePrevious() {
+        console.log('previous')
+    }
+
+    handleOnChange(key, value) {
         this.setState({
             [key]: value
         })
-        console.log(this.state)
     }
 
-    render(){
+    render() {
         return (
             <div>
                 <Header />
                 <div className="DashboardContainer">
-    
                     <div className='Wiz'>
                         <div>
                             <div className='WizHeader'>
@@ -45,25 +59,27 @@ class Wiz01 extends Component{
                         <div className="Inputs">
                             <div>
                                 <h2>Name:</h2>
-                                <input type="text" style={{ 'width': '400px'}} 
+                                <input type="text" style={{ 'width': '400px' }}
+                                    value={this.state.name}
                                     title='name'
-                                    onChange={(e)=>{this.handleOnChange(e.target.title, e.target.value)}}
-                                 />
+                                    maxLength='20'
+                                    onChange={(e) => { this.handleOnChange(e.target.title, e.target.value) }}
+                                />
                             </div>
                             <div>
                                 <h2>Description:</h2>
-                                {/* <input type="textarea" height='200px'/> */}
-                                <textarea style={{'height':'200px' , 'width': '400px'}}
+                                <textarea style={{ 'height': '200px', 'width': '400px' }}
+                                    value={this.state.description}
                                     title='description'
-                                    onChange={(e)=>{this.handleOnChange(e.target.title, e.target.value)}}
-                                 />
+                                    maxLength='250'
+                                    onChange={(e) => { this.handleOnChange(e.target.title, e.target.value) }}
+                                />
                             </div>
                             <div className="WizButtons">
-                                <button >Previous Step</button>
-                                <button >Next Step </button>
+                                <button onClick={()=>this.handleNext()}>Next Step </button>
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
@@ -74,4 +90,4 @@ class Wiz01 extends Component{
 function mapStateToProps(state) {
     return state;
 }
-export default connect(mapStateToProps)(Wiz01)
+export default connect(mapStateToProps, {updateWizard: updateWizard})(Wiz01)

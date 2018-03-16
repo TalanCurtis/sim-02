@@ -24,6 +24,10 @@
   justify-content: center;
   flex-direction: column;  */
 } 
+.CityState{
+  display: flex;
+  justify-content: center;
+}
 
 .NewPropButton{
   height: 60px;
@@ -64,6 +68,11 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding: 10px;
+}
+.Inputs div{
+  margin: 10px;
+
 }
 .WizButtons{
   display: flex;
@@ -72,6 +81,26 @@
   padding: 10px;
   color: red;
   /* flex-direction: column; */
+}
+button{
+  border:none;
+  margin:5px;
+  height: 30px;
+  font-size: 100%;
+  
+}
+
+.Complete{
+  background-color: #8AEA92;
+  border: none;
+}
+.ImageTest{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  height: 300px;
+  width: 400px;
 }
 
 
